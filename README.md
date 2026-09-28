@@ -8,7 +8,6 @@ Code accompanying the paper ["Wasserstein GAN"](https://arxiv.org/abs/1701.07875
 This teaching copy includes compatibility fixes for Python 3.12 / PyTorch 2.7.1.
 Start with [instructions-wgan.md](instructions-wgan.md) for environment setup,
 dataset downloading, CPU checks, GPU/Slurm training, and image generation.
-See [VALIDATION.md](VALIDATION.md) for tested paths and limitations.
 
 Quick dataset preparation after installing the dependencies:
 
