@@ -3,6 +3,21 @@ Wasserstein GAN
 
 Code accompanying the paper ["Wasserstein GAN"](https://arxiv.org/abs/1701.07875)
 
+## Student setup
+
+This teaching copy includes compatibility fixes for Python 3.12 / PyTorch 2.7.1.
+Start with [instructions-wgan.md](instructions-wgan.md) for environment setup,
+dataset downloading, CPU checks, GPU/Slurm training, and image generation.
+See [VALIDATION.md](VALIDATION.md) for tested paths and limitations.
+
+Quick dataset preparation after installing the dependencies:
+
+```bash
+python download_data.py --dataroot data/cifar10
+```
+
+Training uses prepared local data and does not download it automatically.
+
 ## A few notes
 
 - The first time running on the LSUN dataset it can take a long time (up to an hour) to create the dataloader. After the first run a small cache file will be created and the process should take a matter of seconds. The cache is a list of indices in the lmdb database (of LSUN)
@@ -37,7 +52,7 @@ python main.py --dataset lsun --dataroot [lsun-train-folder] --cuda
 **With MLP:**
 
 ```bash
-python main.py --mlp_G --ngf 512
+python main.py --dataset lsun --dataroot [lsun-train-folder] --mlp_G --ngf 512 --cuda
 ```
 
 Generated samples will be in the `samples` folder.
@@ -45,7 +60,7 @@ Generated samples will be in the `samples` folder.
 If you plot the value `-Loss_D`, then you can reproduce the curves from the paper. The curves from the paper (as mentioned in the paper) have a median filter applied to them:
 
 ```python
-med_filtered_loss = scipy.signal.medfilt(-Loss_D, dtype='float64'), 101)
+med_filtered_loss = scipy.signal.medfilt(-Loss_D, kernel_size=101)
 ```
 
-More improved README in the works.
+The optional plotting example requires SciPy; it is not needed for training.

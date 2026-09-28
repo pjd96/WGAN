@@ -1,2 +1,5 @@
-torch
-torchvision
+torch==2.7.1
+torchvision==0.22.1
+numpy==2.2.6
+Pillow==11.2.1
+lmdb==1.6.2

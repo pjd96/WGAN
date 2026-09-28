@@ -6,7 +6,7 @@ class DCGAN_D(nn.Module):
     def __init__(self, isize, nz, nc, ndf, ngpu, n_extra_layers=0):
         super(DCGAN_D, self).__init__()
         self.ngpu = ngpu
-        assert isize % 16 == 0, "isize has to be a multiple of 16"
+        assert isize >= 16 and isize & (isize - 1) == 0, "isize must be a power of two >= 16"
 
         main = nn.Sequential()
         # input is nc x isize x isize
@@ -56,7 +56,7 @@ class DCGAN_G(nn.Module):
     def __init__(self, isize, nz, nc, ngf, ngpu, n_extra_layers=0):
         super(DCGAN_G, self).__init__()
         self.ngpu = ngpu
-        assert isize % 16 == 0, "isize has to be a multiple of 16"
+        assert isize >= 16 and isize & (isize - 1) == 0, "isize must be a power of two >= 16"
 
         cngf, tisize = ngf//2, 4
         while tisize != isize:
@@ -109,7 +109,7 @@ class DCGAN_D_nobn(nn.Module):
     def __init__(self, isize, nz, nc, ndf, ngpu, n_extra_layers=0):
         super(DCGAN_D_nobn, self).__init__()
         self.ngpu = ngpu
-        assert isize % 16 == 0, "isize has to be a multiple of 16"
+        assert isize >= 16 and isize & (isize - 1) == 0, "isize must be a power of two >= 16"
 
         main = nn.Sequential()
         # input is nc x isize x isize
@@ -156,7 +156,7 @@ class DCGAN_G_nobn(nn.Module):
     def __init__(self, isize, nz, nc, ngf, ngpu, n_extra_layers=0):
         super(DCGAN_G_nobn, self).__init__()
         self.ngpu = ngpu
-        assert isize % 16 == 0, "isize has to be a multiple of 16"
+        assert isize >= 16 and isize & (isize - 1) == 0, "isize must be a power of two >= 16"
 
         cngf, tisize = ngf//2, 4
         while tisize != isize:
